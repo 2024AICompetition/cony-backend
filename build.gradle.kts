@@ -29,6 +29,10 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("com.google.firebase:firebase-admin:8.1.0")
+    implementation("org.springframework.boot:spring-boot-starter-web")
 }
 
 kotlin {
