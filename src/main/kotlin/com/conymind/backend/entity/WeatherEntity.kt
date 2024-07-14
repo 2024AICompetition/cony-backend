@@ -1,6 +1,7 @@
 package com.conymind.backend.entity
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Table(name = "weather")
 @Entity
@@ -22,6 +23,8 @@ data class WeatherEntity(
     val longitude: Double,
 
     @Column(name = "address", nullable = false)
-    val address: String
-) {
-}
+    val address: String,
+
+    @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    var createdAt: LocalDateTime? = null,
+)

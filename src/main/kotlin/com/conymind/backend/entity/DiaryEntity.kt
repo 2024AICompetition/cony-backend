@@ -1,5 +1,6 @@
 package com.conymind.backend.entity
 
+import com.conymind.backend.model.Diary
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -31,5 +32,21 @@ data class DiaryEntity(
 
     @ManyToOne
     @JoinColumn(name = "weather_id", referencedColumnName = "id")
-    val weather : WeatherEntity?
+    val weather: WeatherEntity?,
+
+    @ManyToMany
+    @JoinTable(
+        name = "diary_tag_link",
+        joinColumns = [JoinColumn(name = "diary_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "tag_id", referencedColumnName = "id")]
+    )
+    val tags: Set<DiaryTagEntity> = mutableSetOf(),
+
+    @ManyToMany
+    @JoinTable(
+        name = "diary_topic_link",
+        joinColumns = [JoinColumn(name = "diary_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "topic_id", referencedColumnName = "id")]
+    )
+    val topics: Set<DiaryTopicEntity> = mutableSetOf()
 )
