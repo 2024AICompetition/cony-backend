@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "diary")
-data class Diary(
+data class DiaryEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -27,5 +27,9 @@ data class Diary(
     var title: String? = null,
 
     @Column(name = "contents", columnDefinition = "TEXT", nullable = false)
-    var contents: String
+    var contents: String,
+
+    @ManyToOne
+    @JoinColumn(name = "weather_id", referencedColumnName = "id")
+    val weather : WeatherEntity?
 )

@@ -2,11 +2,10 @@ package com.conymind.backend.entity
 
 import jakarta.persistence.*
 import java.time.LocalDateTime
-import java.util.*
 
 @Entity
 @Table(name = "profile")
-data class Profile(
+data class ProfileEntity(
     @Id
     @Column(name = "uid", nullable = false, length = 128)
     val uid: String? = null,
