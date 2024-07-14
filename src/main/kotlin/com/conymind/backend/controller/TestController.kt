@@ -1,5 +1,7 @@
 package com.conymind.backend.controller
 
+import com.conymind.backend.security.FirebaseUserDetails
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,10 +17,7 @@ class ApiController {
     }
 
     @GetMapping("/private")
-    fun privateEndpoint(): String {
-        val authentication = SecurityContextHolder.getContext().authentication
-        val uid = authentication.principal as String
-
-        return "This is a private endpoint. Only authenticated users can access this. $uid"
+    fun privateEndpoint(@AuthenticationPrincipal userDetails: FirebaseUserDetails): String {
+        return userDetails.username
     }
 }
