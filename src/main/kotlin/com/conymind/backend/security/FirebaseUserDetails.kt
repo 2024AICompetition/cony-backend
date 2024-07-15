@@ -4,7 +4,7 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-class FirebaseUserDetails(private val email: String, private val uid: String) : UserDetails {
+class FirebaseUserDetails( val email: String,  val uid: String) : UserDetails {
 
     private val authorities: Collection<GrantedAuthority> = listOf(SimpleGrantedAuthority("USER"))
 

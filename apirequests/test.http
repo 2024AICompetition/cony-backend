@@ -1,1 +1,5 @@
 GET {{baseurl}}/api/private
+
+###
+
+GET {{baseurl}}/api/public

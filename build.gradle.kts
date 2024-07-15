@@ -33,6 +33,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("com.google.firebase:firebase-admin:8.1.0")
     implementation("org.springframework.boot:spring-boot-starter-web")
+
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+    implementation("io.github.openfeign:feign-core:13.3")
+    implementation("io.github.openfeign:feign-gson:13.3")
+
 }
 
 kotlin {
