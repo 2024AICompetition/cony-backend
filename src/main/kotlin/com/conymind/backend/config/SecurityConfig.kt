@@ -27,6 +27,7 @@ class SecurityConfig {
             }
             .authorizeHttpRequests {
                 it.requestMatchers("/public/**").permitAll()
+                it.requestMatchers("/images/**").permitAll()
                 it.anyRequest().authenticated()
             }
             .addFilterBefore(filter, UsernamePasswordAuthenticationFilter::class.java)

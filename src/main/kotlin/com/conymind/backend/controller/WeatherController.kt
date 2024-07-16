@@ -1,6 +1,6 @@
 package com.conymind.backend.controller
 
-import com.conymind.backend.externalapi.*
+import com.conymind.backend.model.Language
 import com.conymind.backend.model.Weather
 import com.conymind.backend.security.FirebaseUserDetails
 import com.conymind.backend.service.WeatherService
@@ -21,8 +21,9 @@ class WeatherController(private val weatherSerivce: WeatherService) {
     fun getWeather(
         @AuthenticationPrincipal userDetails: FirebaseUserDetails,
         @RequestParam lat: Double,
-        @RequestParam lng: Double
+        @RequestParam lng: Double,
+        @RequestParam lang : Language
     ): Weather {
-        return weatherSerivce.getWeatherAndLocation(lat, lng)
+        return weatherSerivce.getWeatherAndLocation(lat, lng, lang)
     }
 }

@@ -2,6 +2,7 @@ package com.conymind.backend.lib.externalapi.googlemap
 
 data class ReverseGeocodingRequest(
     val latlng : String,
-    val key: String
+    val key: String,
+    val language: String = "ko",
 ) {
 }

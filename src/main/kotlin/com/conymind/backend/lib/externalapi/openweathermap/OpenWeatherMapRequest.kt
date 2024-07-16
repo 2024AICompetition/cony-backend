@@ -5,6 +5,6 @@ data class OneCallRequest(
     val lon: Double,
     val appid: String,
     val exclude: String,
-    val lang : String = "kr",
+    val lang : String,
 ) {
 }
