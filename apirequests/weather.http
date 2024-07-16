@@ -1,2 +1,2 @@
-GET http://localhost:8080/weather?lat=37.47493934021906&lng=127.1034278852717&lang=ENE
+GET http://localhost/weather?lat=37.47493934021906&lng=127.1034278852717&lang=KO
 Authorization: Bearer {{token}}
