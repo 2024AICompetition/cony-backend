@@ -46,7 +46,7 @@ class WeatherService(
         val geo = googleMapAPI.getReverseGeocoding(
             ReverseGeocodingRequest(
                 "$latitude,$longitude",
-                "AIzaSyCpU6AzatiiMlprXWpp4frwdXq8K533qmE"
+                googleMapAPIKey
             )
         )
 
