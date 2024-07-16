@@ -1,12 +1,11 @@
 package com.conymind.backend.config
 
-import com.conymind.backend.externalapi.GoogleMapAPI
-import com.conymind.backend.externalapi.OpenWeatherMapAPI
+import com.conymind.backend.lib.externalapi.googlemap.GoogleMapAPI
+import com.conymind.backend.lib.externalapi.openweathermap.OpenWeatherMapAPI
 import feign.Feign
 import feign.gson.GsonDecoder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
 class APIConfig {

@@ -1,4 +1,4 @@
-package com.conymind.backend.externalapi
+package com.conymind.backend.lib.externalapi.googlemap
 
 data class ReverseGeocodingRequest(
     val latlng : String,

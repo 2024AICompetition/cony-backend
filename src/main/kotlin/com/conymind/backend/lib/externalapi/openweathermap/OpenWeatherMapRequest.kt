@@ -1,4 +1,4 @@
-package com.conymind.backend.externalapi
+package com.conymind.backend.lib.externalapi.openweathermap
 
 data class OneCallRequest(
     val lat: Double,

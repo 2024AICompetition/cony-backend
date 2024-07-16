@@ -1,23 +1,15 @@
 package com.conymind.backend.service
 
 import com.conymind.backend.entity.WeatherEntity
-import com.conymind.backend.externalapi.GoogleMapAPI
-import com.conymind.backend.externalapi.OneCallRequest
-import com.conymind.backend.externalapi.OpenWeatherMapAPI
-import com.conymind.backend.externalapi.ReverseGeocodingRequest
+import com.conymind.backend.lib.externalapi.googlemap.GoogleMapAPI
+import com.conymind.backend.lib.externalapi.openweathermap.OneCallRequest
+import com.conymind.backend.lib.externalapi.openweathermap.OpenWeatherMapAPI
+import com.conymind.backend.lib.externalapi.googlemap.ReverseGeocodingRequest
 import com.conymind.backend.model.Weather
+import com.conymind.backend.model.toDomain
 import com.conymind.backend.repository.WeatherRepository
-import feign.Feign
-import feign.gson.GsonDecoder
-import jakarta.persistence.*
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
-import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.awaitBody
-import reactor.core.publisher.Mono
 import java.time.LocalDateTime
 
 
@@ -50,7 +42,7 @@ class WeatherService(
             )
         )
 
-        val weatherEntity : WeatherEntity = WeatherEntity(
+        val weatherEntity : WeatherEntity = weatherRepository.save(WeatherEntity(
             0,
             weather.current.temp,
             weather.current.weather[0].description,
@@ -58,18 +50,8 @@ class WeatherService(
             longitude,
             geo.formattedAddress ?: "Unknown Location",
             LocalDateTime.now()
-        )
+        ))
 
-        weatherRepository.save(weatherEntity)
-
-        return Weather(
-            weatherEntity.id,
-            weatherEntity.temperature,
-            weatherEntity.weather,
-            weatherEntity.latitude,
-            weatherEntity.longitude,
-            weatherEntity.address,
-            weatherEntity.createdAt
-        )
+        return weatherEntity.toDomain()
     }
 }

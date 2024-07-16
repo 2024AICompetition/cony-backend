@@ -1,4 +1,4 @@
-package com.conymind.backend.externalapi
+package com.conymind.backend.lib.externalapi.googlemap
 
 import com.google.gson.annotations.SerializedName
 
