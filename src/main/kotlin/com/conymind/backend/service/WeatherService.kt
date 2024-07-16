@@ -28,7 +28,18 @@ class WeatherService(
     @Value("\${googlemap.api.key}")
     private lateinit var googleMapAPIKey: String
 
+    fun getWeatherData(latitude: Double, longitude: Double, lang: Language): WeatherEntity? {
+        val sixHoursAgo = LocalDateTime.now().minusHours(6)
+
+        return weatherRepository.findNearestRecentWeather(latitude, longitude, lang.name, sixHoursAgo)
+    }
+
     fun getWeatherAndLocation(latitude : Double, longitude : Double, lang : Language) : Weather {
+        val cache = getWeatherData(latitude, longitude, lang)
+        if (cache != null) {
+            return cache.toDomain()
+        }
+
         val weather = openWeatherMapAPI.getOneCall(
             OneCallRequest(
                 latitude,
