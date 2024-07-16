@@ -1,5 +1,6 @@
 package com.conymind.backend.config.advice
 
+import com.conymind.backend.exception.ConyRuntimeException
 import com.conymind.backend.model.ApiResponse
 import org.apache.coyote.BadRequestException
 import org.springframework.http.HttpStatus
@@ -11,6 +12,16 @@ import org.springframework.web.context.request.WebRequest
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
+
+    @ExceptionHandler(ConyRuntimeException::class)
+    fun handleConyRuntimeException(ex: ConyRuntimeException, request: WebRequest): ResponseEntity<ApiResponse<Nothing>> {
+        val apiResponse = ApiResponse(
+            success = false,
+            data = null,
+            message = ex.message
+        )
+        return ResponseEntity(apiResponse, ex.conyHttpError.httpStatus)
+    }
 
     @ExceptionHandler(Exception::class)
     fun handleGlobalException(ex: Exception, request: WebRequest): ResponseEntity<ApiResponse<Nothing>> {
