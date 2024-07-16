@@ -4,6 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.io.FileInputStream
 import java.io.IOException
@@ -13,17 +14,19 @@ import java.io.IOException
 class FirebaseService {
     private val logger = LoggerFactory.getLogger(FirebaseService::class.java)
 
+    @Value("\${cony.firebase.config.path}")
+    private lateinit var firebaseConfigPath: String
+
     @jakarta.annotation.PostConstruct
     fun initializeFirebase() {
         try {
-            val path = System.getenv("CONY_FIREBASE_CONFIG_PATH")
-            logger.info("Firebase config path: $path")
+            logger.info("Firebase config path: $firebaseConfigPath")
 
-            if (path.isNullOrBlank()) {
+            if (firebaseConfigPath.isBlank()) {
                 throw IllegalArgumentException("CONY_FIREBASE_CONFIG_PATH environment variable is not set")
             }
 
-            val serviceAccount = FileInputStream(path)
+            val serviceAccount = FileInputStream(firebaseConfigPath)
             val options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build()
