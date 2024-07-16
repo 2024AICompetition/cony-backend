@@ -1,6 +1,8 @@
 package com.conymind.backend.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
 @Entity
@@ -13,13 +15,11 @@ data class ProfileEntity(
     @Column(name = "display_name", nullable = false, length = 50)
     var displayName: String,
 
-    @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     var createdAt: LocalDateTime? = null,
 
-    @Column(
-        name = "updated_at",
-        nullable = false,
-        columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
-    )
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
     var updatedAt: LocalDateTime? = null
 )
