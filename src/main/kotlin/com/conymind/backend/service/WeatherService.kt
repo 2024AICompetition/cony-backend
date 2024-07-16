@@ -9,6 +9,7 @@ import com.conymind.backend.model.Language
 import com.conymind.backend.model.Weather
 import com.conymind.backend.model.toDomain
 import com.conymind.backend.repository.WeatherRepository
+import com.conymind.backend.util.fahrenheitToCelsius
 import org.apache.commons.codec.language.bm.Lang
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -48,7 +49,7 @@ class WeatherService(
 
         val weatherEntity : WeatherEntity = weatherRepository.save(WeatherEntity(
             0,
-            weather.current.temp,
+            fahrenheitToCelsius(weather.current.temp),
             weather.current.weather[0].main,
             weather.current.weather[0].description,
             latitude,

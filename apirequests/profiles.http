@@ -1,0 +1,2 @@
+GET {{baseurl}}/profiles/me
+Authorization: Bearer {{token}}
