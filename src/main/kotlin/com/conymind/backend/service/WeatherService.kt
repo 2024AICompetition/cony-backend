@@ -10,6 +10,7 @@ import com.conymind.backend.model.Weather
 import com.conymind.backend.model.toDomain
 import com.conymind.backend.repository.WeatherRepository
 import com.conymind.backend.util.fahrenheitToCelsius
+import com.conymind.backend.util.kelvinToCelsius
 import org.apache.commons.codec.language.bm.Lang
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -19,7 +20,7 @@ import java.time.LocalDateTime
 @Service
 class WeatherService(
     private val googleMapAPI: GoogleMapAPI,
-    private val openWeatherMapAPI : OpenWeatherMapAPI,
+    private val openWeatherMapAPI: OpenWeatherMapAPI,
     private val weatherRepository: WeatherRepository
 ) {
     @Value("\${openweathermap.api.key}")
@@ -34,7 +35,7 @@ class WeatherService(
         return weatherRepository.findNearestRecentWeather(latitude, longitude, lang.name, sixHoursAgo)
     }
 
-    fun getWeatherAndLocation(latitude : Double, longitude : Double, lang : Language) : Weather {
+    fun getWeatherAndLocation(latitude: Double, longitude: Double, lang: Language): Weather {
         val cache = getWeatherData(latitude, longitude, lang)
         if (cache != null) {
             return cache.toDomain()
@@ -58,17 +59,19 @@ class WeatherService(
             )
         )
 
-        val weatherEntity : WeatherEntity = weatherRepository.save(WeatherEntity(
-            0,
-            fahrenheitToCelsius(weather.current.temp),
-            weather.current.weather[0].main,
-            weather.current.weather[0].description,
-            latitude,
-            longitude,
-            geo.formattedAddress ?: "Unknown Location",
-            lang,
-            LocalDateTime.now()
-        ))
+        val weatherEntity: WeatherEntity = weatherRepository.save(
+            WeatherEntity(
+                0,
+                kelvinToCelsius(weather.current.temp),
+                weather.current.weather[0].main,
+                weather.current.weather[0].description,
+                latitude,
+                longitude,
+                geo.formattedAddress ?: "Unknown Location",
+                lang,
+                LocalDateTime.now()
+            )
+        )
 
         return weatherEntity.toDomain()
     }
