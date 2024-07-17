@@ -1,0 +1,2 @@
+GET {{baseurl}}/questions
+Authorization: Bearer {{token}}
