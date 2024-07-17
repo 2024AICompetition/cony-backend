@@ -11,8 +11,9 @@ data class DiaryEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(name = "authorUid", nullable = false, length = 128)
-    val authorId: String,
+    @ManyToOne
+    @JoinColumn(name = "author_uid", referencedColumnName = "uid")
+    val profile: ProfileEntity,
 
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     var createdAt: LocalDateTime? = null,

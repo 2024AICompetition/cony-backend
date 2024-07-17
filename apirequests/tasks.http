@@ -1,0 +1,26 @@
+GET {{baseurl}}/tasks
+Authorization: Bearer {{token}}
+
+###
+POST {{baseurl}}/tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "content": "Buy milk",
+  "completed": false
+}
+
+###
+PUT {{baseurl}}/tasks/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "content": "Buy milk and bread",
+    "completed": true
+}
+
+###
+DELETE {{baseurl}}/tasks/1
+Authorization: Bearer {{token}}

@@ -14,15 +14,7 @@ class CardController {
         return listOf(
             Card(
                 iconImage = null,
-                title = "CONY의 오늘 한마디",
-                headline = "직장 상사와 갈등이 있어도 너무 걱정하지 마세요!",
-                links = listOf(),
-                contents = null
-            ),
-            Card(
-                iconImage = null,
                 title = "한주의 시작은 힘들어요",
-                headline = null,
                 links = listOf(
                     Link(
                         "https://conymind.com", "관련 기사에 대한 제목입니다.",
@@ -35,12 +27,13 @@ class CardController {
                         "https://picsum.photos/200/300"
                     )
                 ),
-                contents = null
+                contents = null,
+                cardColor = "#D8D8E5",
+                cardColorAccent = "#555068"
             ),
             Card(
                 iconImage = null,
                 title = "과거의 오늘 보기",
-                headline = null,
                 links = listOf(
                     Link(
                         "https://conymind.com", "2019년 6월 27일",
@@ -48,7 +41,9 @@ class CardController {
                         "https://picsum.photos/200/300"
                     )
                 ),
-                contents = "여행에서 뜻밖의 경험을 하고 새로운 사람을 알게 되었던 날이에요."
+                contents = "여행에서 뜻밖의 경험을 하고 새로운 사람을 알게 되었던 날이에요.",
+                cardColor = "#D4D4B4",
+                cardColorAccent = "#504535"
             )
         )
     }

@@ -13,10 +13,3 @@ data class Profile(
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime
 )
-
-fun ProfileEntity.toDomain() = Profile(
-    uid = this.uid!!,
-    displayName = this.displayName,
-    createdAt = this.createdAt!!,
-    updatedAt = this.updatedAt!!
-)

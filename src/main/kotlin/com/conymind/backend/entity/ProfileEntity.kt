@@ -1,5 +1,6 @@
 package com.conymind.backend.entity
 
+import com.conymind.backend.model.Profile
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -22,4 +23,11 @@ data class ProfileEntity(
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     var updatedAt: LocalDateTime? = null
+)
+
+fun ProfileEntity.toProfile() = Profile(
+    uid = this.uid!!,
+    displayName = this.displayName,
+    createdAt = this.createdAt!!,
+    updatedAt = this.updatedAt!!
 )

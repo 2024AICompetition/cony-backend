@@ -1,0 +1,2 @@
+GET {{baseurl}}/api/getDailyQuote
+Authorization: Bearer {{token}}
