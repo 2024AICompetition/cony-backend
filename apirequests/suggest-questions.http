@@ -1,0 +1,2 @@
+GET {{baseurl}}/suggest-questions
+Authorization: Bearer {{token}}
