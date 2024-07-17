@@ -1,0 +1,2 @@
+GET {{baseurl}}/cards
+Authorization: Bearer {{token}}
