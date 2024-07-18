@@ -19,3 +19,7 @@ Content-Type: application/json
 {
   "transcript": "This is a test transcript."
 }
+
+###
+POST {{baseurl}}/records/1/convert-to-diary?lat=40.7128&lng=-74.0060&lang=KO
+Authorization: Bearer {{token}}

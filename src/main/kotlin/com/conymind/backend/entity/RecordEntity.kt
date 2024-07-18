@@ -1,5 +1,6 @@
 package com.conymind.backend.entity
 
+import com.conymind.backend.model.Record
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -42,4 +43,18 @@ data class RecordEntity(
     @ManyToOne
     @JoinColumn(name = "current_focus_question_category_id", referencedColumnName = "id")
     val currentFocusQuestionCategory: SuggestQuestionCategoryEntity? = null
+
 )
+
+fun RecordEntity.toDomain(): Record {
+    return Record(
+        id = id ?: throw IllegalArgumentException("Record ID cannot be null"),
+        profileUid = profile.uid ?: throw IllegalArgumentException("Profile UID cannot be null"),
+        createdAt = createdAt,
+        modifiedAt = modifiedAt,
+        currentTranscript = currentTranscript,
+        answeredQuestions = answeredQuestions.map { it.toModel() }.toSet(),
+        currentFocusQuestion = currentFocusQuestion?.toModel(),
+        currentFocusQuestionCategory = currentFocusQuestionCategory?.toModel()
+    )
+}

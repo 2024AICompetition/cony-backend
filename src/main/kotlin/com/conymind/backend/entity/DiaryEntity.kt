@@ -1,6 +1,7 @@
 package com.conymind.backend.entity
 
 import com.conymind.backend.model.Diary
+import com.conymind.backend.model.toDomain
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -50,4 +51,18 @@ data class DiaryEntity(
         inverseJoinColumns = [JoinColumn(name = "topic_id", referencedColumnName = "id")]
     )
     val topics: Set<DiaryTopicEntity> = mutableSetOf()
-)
+) {
+    fun toDomain(): Diary {
+        return Diary(
+            id = id ?: throw IllegalArgumentException("Diary ID cannot be null"),
+            profile = profile.toProfile()   ,
+            createdAt = createdAt ?: throw IllegalArgumentException("Created at cannot be null"),
+            modifiedAt = modifiedAt ?: throw IllegalArgumentException("Modified at cannot be null"),
+            title = title,
+            contents = contents,
+            weather = weather?.toDomain(),
+            tags = tags.map { it.toDomain() }.toSet(),
+            topics = topics.map { it.toDomain() }.toSet()
+        )
+    }
+}

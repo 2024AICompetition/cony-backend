@@ -1,5 +1,7 @@
 package com.conymind.backend.entity
 
+import com.conymind.backend.model.DiaryTag
+import com.conymind.backend.model.TagType
 import jakarta.persistence.*
 
 @Entity
@@ -16,9 +18,11 @@ data class DiaryTagEntity(
     @Enumerated(EnumType.STRING)
     val type: TagType
 ){
-
-}
-
-enum class TagType {
-    EMOTION, PERSON, EVENT, PLACE
+    fun toDomain(): DiaryTag {
+        return DiaryTag(
+            id = id ?: throw IllegalArgumentException("Tag ID cannot be null"),
+            name = name,
+            type = type
+        )
+    }
 }
