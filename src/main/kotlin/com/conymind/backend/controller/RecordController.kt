@@ -55,6 +55,22 @@ class RecordController(private val recordService: RecordService, private val dia
         ).toDomain()
     }
 
+    @PutMapping("/{id}/skip-question")
+    fun skipQuestion(
+        @AuthenticationPrincipal userDetails: FirebaseUserDetails,
+        @PathVariable id: Long,
+        @RequestBody updateTranscriptRequest: UpdateTranscriptRequest,
+    ): Record {
+        val record = recordService.getRecord(id = id)
+        if (record.profile.uid != userDetails.uid) {
+            throw IllegalArgumentException("Invalid user")
+        }
+
+        return recordService.skipQuestion(
+            id = id,
+        ).toDomain()
+    }
+
     @PostMapping("/{id}/convert-to-diary")
     fun convertToDiary(
         @AuthenticationPrincipal userDetails: FirebaseUserDetails,
@@ -76,4 +92,5 @@ class RecordController(private val recordService: RecordService, private val dia
 
         return diaryService.convertRecordToDiary(record, weatherId)
     }
+
 }

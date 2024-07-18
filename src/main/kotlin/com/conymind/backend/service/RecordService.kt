@@ -30,8 +30,12 @@ class RecordService(
         val record = RecordEntity(
             profile = profile,
             currentTranscript = "",
-            currentFocusQuestion = if (currentFocusQuestionId != null) suggestQuestionRepository.findById(currentFocusQuestionId).getOrNull() else null,
-            currentFocusQuestionCategory = if (currentFocusQuestionCategoryId != null) suggestQuestionCategoryRepository.findById(currentFocusQuestionCategoryId).getOrNull() else null
+            currentFocusQuestion = if (currentFocusQuestionId != null) suggestQuestionRepository.findById(
+                currentFocusQuestionId
+            ).getOrNull() else null,
+            currentFocusQuestionCategory = if (currentFocusQuestionCategoryId != null) suggestQuestionCategoryRepository.findById(
+                currentFocusQuestionCategoryId
+            ).getOrNull() else null
         )
 
         return recordRepository.save(record)
@@ -42,7 +46,17 @@ class RecordService(
             ?: throw IllegalArgumentException("Invalid record ID")
 
         record.currentTranscript = transcript
+        return recordRepository.save(record)
+    }
 
+    fun skipQuestion(id: Long): RecordEntity {
+        val record = recordRepository.findById(id).getOrNull()
+            ?: throw IllegalArgumentException("Invalid record ID")
+
+        record.currentFocusQuestionCategory?.id?.let {
+            record.currentFocusQuestion =
+                suggestQuestionRepository.findByCategoryId(it).shuffled().first() // 순서 보장 하고 싶은 경우 인덱스로 접근
+        }
         return recordRepository.save(record)
     }
 }

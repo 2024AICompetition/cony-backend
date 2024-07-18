@@ -38,11 +38,11 @@ data class RecordEntity(
 
     @ManyToOne
     @JoinColumn(name = "current_focus_question_id", referencedColumnName = "id")
-    val currentFocusQuestion: SuggestQuestionEntity? = null,
+    var currentFocusQuestion: SuggestQuestionEntity? = null,
 
     @ManyToOne
     @JoinColumn(name = "current_focus_question_category_id", referencedColumnName = "id")
-    val currentFocusQuestionCategory: SuggestQuestionCategoryEntity? = null
+    var currentFocusQuestionCategory: SuggestQuestionCategoryEntity? = null
 
 )
 

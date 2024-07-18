@@ -12,4 +12,7 @@ interface SuggestQuestionRepository : JpaRepository<SuggestQuestionEntity, Long>
 
     @Query("SELECT sq FROM SuggestQuestionEntity sq JOIN ProfileSuggestQuestionEntity psq ON sq.id = psq.suggestQuestion.id WHERE psq.profile.uid = :uid AND sq.expirationDate > CURRENT_TIMESTAMP")
     fun findPersonalizedQuestionsByUid(@Param("uid") uid: String): List<SuggestQuestionEntity>
+
+    @Query("SELECT sq FROM SuggestQuestionEntity sq WHERE sq.category.id = :category_id")
+    fun findByCategoryId(@Param("category_id") categoryId: Long): List<SuggestQuestionEntity>
 }
