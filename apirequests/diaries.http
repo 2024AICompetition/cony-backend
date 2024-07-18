@@ -1,0 +1,4 @@
+### 다이어리 필터
+GET {{baseurl}}/diaries/diary-filter-list
+Authorization: Bearer {{token}}
+Content-Type: application/json
