@@ -9,6 +9,7 @@ fun mapWeatherToIcon(weatherGroup: String): String? {
         "Clear" -> "/images/clear_day.png"
         "Clouds" -> "/images/foggy.png"
         "Atmosphere" -> "/images/foggy.png"
-        else -> null
+        "Mist" -> "/images/foggy.png"
+        else ->  "/images/foggy.png"
     }
 }

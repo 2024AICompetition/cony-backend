@@ -1,0 +1,21 @@
+GET {{baseurl}}/records/1
+Authorization: Bearer {{token}}
+
+###
+POST {{baseurl}}/records
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "focusQuestionId": 1,
+  "focusQuestionCategoryId": 1
+}
+
+###
+PUT {{baseurl}}/records/1/transcript
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "transcript": "This is a test transcript."
+}
